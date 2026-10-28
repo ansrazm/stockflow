@@ -9,7 +9,7 @@ services:
    - "5432:5432"
   volumes:
    - ./backend/migrations:/docker-entrypoint-initdb.d:ro
-   - pgdata:/var/lib/postgresql/data
+   - pgdata:/var/lib/postgresql/
   healthcheck:
    test: ["CMD-SHELL", "pg_isready -U stockflow -d stockflow"]
    interval: 3s
