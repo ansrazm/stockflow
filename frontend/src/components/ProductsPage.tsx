@@ -3,6 +3,8 @@ import { api } from '../api/client'
 import type { Product } from '../api/types'
 import { useDebounce } from '../hooks/useDebounce'
 import { LOW_STOCK_THRESHOLD, formatRupiah, timeAgo } from '../lib/format'
+import AdjustStockModal from './AdjustStockModal'
+import SummaryCards from './SummaryCards'
 
 type Filter = 'all' | 'active' | 'inactive' | 'low'
 
@@ -36,6 +38,7 @@ export default function ProductsPage() {
   const [filter, setFilter] = useState<Filter>('all')
   const [state, setState] = useState<State>({ status: 'loading' })
   const [reloadKey, setReloadKey] = useState(0)
+  const [adjusting, setAdjusting] = useState<Product | null>(null)
   const debouncedSearch = useDebounce(search, 300)
 
   useEffect(() => {
@@ -60,6 +63,8 @@ export default function ProductsPage() {
 
   return (
     <section>
+      <SummaryCards reloadKey={reloadKey} />
+
       <h2>Products</h2>
 
       <div className="toolbar">
@@ -101,6 +106,7 @@ export default function ProductsPage() {
               <th className="num">Stock</th>
               <th>Status</th>
               <th>Last movement</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -119,10 +125,24 @@ export default function ProductsPage() {
                   </span>
                 </td>
                 <td>{timeAgo(p.last_movement_at)}</td>
+                <td>
+                  <button onClick={() => setAdjusting(p)}>Adjust</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {adjusting && (
+        <AdjustStockModal
+          product={adjusting}
+          onClose={() => setAdjusting(null)}
+          onSaved={() => {
+            setAdjusting(null)
+            setReloadKey((k) => k + 1)
+          }}
+        />
       )}
     </section>
   )

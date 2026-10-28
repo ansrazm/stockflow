@@ -12,3 +12,27 @@ th, td { padding: 8px 10px; border-bottom: 1px solid #e3e5e8; text-align: left; 
 .badge.active { background: #d9f2e0; color: #17612b; }
 .badge.inactive { background: #e6e6e6; color: #555; }
 .badge.low { background: #fde8c8; color: #8a5300; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.card { background: #fff; padding: 12px 16px; border: 1px solid #e3e5e8; border-radius: 6px; }
+.card-label { font-size: 13px; color: #666; }
+.card-value { font-size: 22px; font-weight: 600; margin-top: 4px; }
+.overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; }
+.modal { background: #fff; padding: 20px; border-radius: 8px; width: 360px; max-width: 90vw; display: flex; flex-direction: column; gap: 10px; }
+.modal label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.modal .actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.muted { color: #666; font-size: 13px; margin: 0; }
+.field-error { color: #b00020; font-size: 13px; margin: 0; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.nav { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; }
+.open-order { display: flex; gap: 6px; margin-left: auto; }
+.open-order input { width: 100px; }
+.order-form { display: flex; flex-direction: column; gap: 10px; background: #fff; padding: 16px; border: 1px solid #e3e5e8; border-radius: 6px; }
+.order-form label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.line { padding: 8px; border: 1px solid transparent; border-radius: 6px; }
+.line.conflict { border-color: #b00020; background: #fdecee; }
+.line-row { display: flex; gap: 8px; }
+.line-row input:first-child { flex: 1; }
+.line-row .qty { width: 90px; }
+.actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+.notice { background: #d9f2e0; color: #17612b; padding: 8px 12px; border-radius: 6px; }
+tfoot th { border-top: 2px solid #e3e5e8; }
