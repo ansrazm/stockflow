@@ -25,6 +25,8 @@ func (h *Handler) Routes(r chi.Router) {
 	r.Post("/products/{id}/stock", h.adjustStock)
 	r.Get("/products/{id}/movements", h.listMovements)
 	r.Post("/orders", h.createOrder)
+	r.Get("/orders/{id}", h.getOrder)
+	r.Post("/orders/{id}/cancel", h.cancelOrder)
 }
 
 func (h *Handler) listProducts(w http.ResponseWriter, r *http.Request) {
