@@ -18,7 +18,7 @@ import (
 func main() {
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
-		dsn = "postgres://stockflow:stockflow@localhost:5432/stockflow"
+		dsn = "postgres://stockflow:stockflow@localhost:5433/stockflow"
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
