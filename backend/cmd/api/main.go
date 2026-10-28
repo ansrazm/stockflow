@@ -12,6 +12,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"github.com/ansrazm/stockflow/backend/internal/httpapi"
+	"github.com/ansrazm/stockflow/backend/internal/store"
 )
 
 func main() {
@@ -32,12 +33,15 @@ func main() {
 		log.Fatalf("db ping: %v", err)
 	}
 
+	h := httpapi.NewHandler(store.New(pool))
+
 	r := chi.NewRouter()
 	r.Use(middleware.Logger, middleware.Recoverer)
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", func(w http.ResponseWriter, _ *http.Request) {
 			httpapi.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
 		})
+		h.Routes(r)
 	})
 
 	addr := ":8080"
