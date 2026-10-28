@@ -19,6 +19,9 @@ func NewHandler(s *store.Store) *Handler {
 
 func (h *Handler) Routes(r chi.Router) {
 	r.Get("/products", h.listProducts)
+	r.Post("/products", h.createProduct)
+	r.Put("/products/{id}", h.updateProduct)
+	r.Delete("/products/{id}", h.deleteProduct)
 }
 
 func (h *Handler) listProducts(w http.ResponseWriter, r *http.Request) {
